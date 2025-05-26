@@ -43,6 +43,7 @@ class Pala extends Rectangle {
     }
 
     update(key, alcada) { 
+
         if (key.DOWN.pressed) {
             /********************************* 
              * Tasca. Definir el moviment de la pala
