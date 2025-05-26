@@ -1,14 +1,59 @@
 class Bola extends Rectangle {
     constructor(puntPosicio, amplada, alcada) {
-        super(puntPosicio, amplada, alcada);       
+        super(puntPosicio, amplada, alcada);
         this.velocitatx = 2;
         this.velocitaty = 2;
-        this.colorRectangle = "#FF69B4";
-       
+        this.colorRectangle = "#eee";
+        this.trails = []; // Array per emmagatzemar les posicions anteriors
+        this.glowColor = "rgb(255, 0, 140)"; // Color del brillant
     };
-    mou(mouX,mouY){
-        this.puntPosicio.x += mouX;
-        this.puntPosicio.y += mouY;
+
+    draw(ctx) {
+        ctx.save();
+
+        // 1. Dibuixa la traça (efecte de moviment)
+        this.trails.forEach((trail, index) => {
+            const opacity = 0.7 - (index * 0.15); // Opacitat decreixent
+            const radius = Math.min(this.amplada, this.alcada) / 2 * (0.9 - index * 0.1);
+
+            // Brillantor per a la traça
+            ctx.shadowColor = this.glowColor;
+            ctx.shadowBlur = 15 * opacity;
+
+            ctx.beginPath();
+            ctx.arc(
+                trail.x + this.amplada / 2,
+                trail.y + this.alcada / 2,
+                radius,
+                0,
+                Math.PI * 2
+            );
+            ctx.fillStyle = `rgba(255,255,255,${opacity * 0.4})`;
+            ctx.fill();
+        });
+
+        // 2. Dibuixa la bola principal amb brillantor
+        const centreX = this.puntPosicio.x + this.amplada / 2;
+        const centreY = this.puntPosicio.y + this.alcada / 2;
+        const radi = Math.min(this.amplada, this.alcada) / 2;
+
+        // Configuració del brillant
+        ctx.shadowColor = this.glowColor;
+        ctx.shadowBlur = 15;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        // Dibuixa el cos principal
+        ctx.beginPath();
+        ctx.arc(centreX, centreY, radi, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+
+        // 3. Actualitza la traça
+        this.trails.unshift({ x: this.puntPosicio.x, y: this.puntPosicio.y });
+        if (this.trails.length > 5) this.trails.pop(); // Manté 5 frames de traça
+
+        ctx.restore();
     }
 
     update(ampleCanva, altCanva, palaJugador, palaOrdinador) {
@@ -241,5 +286,5 @@ class Bola extends Rectangle {
             pala: tipoPala
         };
     }
-  
+
 }
