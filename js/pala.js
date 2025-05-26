@@ -42,7 +42,7 @@ class Pala extends Rectangle {
         this.puntPosicio.y += mouY;
     }
 
-    update(key, alcada) { //MEJORAR LOS MOVIMIENTOS CON TECLA 
+    update(key, alcada) { 
         if (key.DOWN.pressed) {
             /********************************* 
              * Tasca. Definir el moviment de la pala
@@ -82,6 +82,8 @@ class Pala extends Rectangle {
 
             this.mou(x, y);
         }
+
+        this.mou(0, 0); // Força actualització immediata
     }
 
     updateAuto(alcada) {
