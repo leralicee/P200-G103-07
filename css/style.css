@@ -1,12 +1,13 @@
-@keyframes title-glow {
+/* Optimización de animaciones */
+@keyframes parpadeo {
 
     0%,
     100% {
-        text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color), 0 0 30px var(--main-color);
+        opacity: 1;
     }
 
     50% {
-        text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color), 0 0 45px var(--main-color);
+        opacity: 0;
     }
 }
 
@@ -19,18 +20,6 @@
 
     50% {
         transform: translateY(-5px);
-    }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
     }
 }
 
@@ -206,7 +195,7 @@ td {
 }
 
 .bottom-button {
-    background: transparent;
+    background: #1E1E1E;
     border: 2px solid var(--main-color);
     color: var(--text-light);
     padding: 0.6rem 1.2rem;
@@ -223,19 +212,6 @@ td {
     color: #000;
     transform: translateY(-2px);
     box-shadow: 0 0px 15px var(--main-color);
-}
-
-/* Optimización de animaciones */
-@keyframes parpadeo {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
 }
 
 .background {
