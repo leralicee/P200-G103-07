@@ -1,7 +1,7 @@
 //Variables i constants globals
 //Main de l'aplicatiu
 var joc;
-$(function(){
+$(function () {
 
     let myCanvas = $("#joc")[0];
     let myCtx = myCanvas.getContext("2d");
@@ -10,16 +10,16 @@ $(function(){
      * Tasca. Inicialitza la classe JOC les posicions 
      * dels elements del joc
      * al canva: Pales, bola, etc
-    **********************************/  
+    **********************************/
     joc = new Joc(myCanvas, myCtx);
 
     inicialitzaMenu();
     joc.inicialitza();
-    
+
     animacio();
 })
 
-function animacio(){
+function animacio() {
     joc.update();
     //Oportunitat per actualitzar les puntuacions
     //revisar si seguim jugant o no
@@ -81,4 +81,23 @@ function inicialitzaMenu() {
         $('#menu').hide();
         $('#display, #divjoc').show();
     }
+
+    // Configurar el botón de música
+    $('#musicBtn').click(function () {
+        const musica = document.getElementById('backgroundMusic');
+        if ($(this).text() === 'MUSIC: ON') {
+            $(this).text('MUSIC: OFF');
+            musica.pause();
+        } else {
+            $(this).text('MUSIC: ON');
+            musica.play();
+        }
+    });
+
+    // Configurar el botón de caché
+    $('#cacheBtn').click(function () {
+        localStorage.removeItem('highScores');
+        carregarPuntuacions();
+        alert('High scores cache cleared!');
+    });
 }
