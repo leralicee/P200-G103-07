@@ -47,10 +47,10 @@ camera.position.z = 30;
 // reactivitat a l'àudio
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const analyser = audioContext.createAnalyser();
-const audioElement = document.getElementById('backgroundMusic');
-const source = audioContext.createMediaElementSource(audioElement);
+// const audioElement = document.getElementById('backgroundMusic');
+// const source = audioContext.createMediaElementSource(audioElement);
 
-source.connect(analyser);
+// source.connect(analyser);
 analyser.connect(audioContext.destination);
 const frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
